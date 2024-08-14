@@ -26,8 +26,8 @@ export default function Page({
   return (
     <>
       <Head>
-        <title>Frames.js app</title>
-        fffffffffff
+        <title>Moxie Value</title>
+
         {metadataToMetaTags(metadata)}
       </Head>
     </>
