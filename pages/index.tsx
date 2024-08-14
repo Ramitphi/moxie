@@ -6,10 +6,7 @@ import {
 } from "frames.js/next/pages-router/client";
 
 export const getServerSideProps = async function getServerSideProps() {
-  const url = new URL(
-    "/api/frames",
-    " https://543f-103-59-75-181.ngrok-free.app"
-  );
+  const url = new URL("/api/frames", `${process.env.APP_URL}`);
 
   return {
     props: {
@@ -30,6 +27,7 @@ export default function Page({
     <>
       <Head>
         <title>Frames.js app</title>
+        fffffffffff
         {metadataToMetaTags(metadata)}
       </Head>
     </>
