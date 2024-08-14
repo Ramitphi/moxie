@@ -3,6 +3,9 @@ import { Button } from "frames.js/next/pages-router/server";
 import { frames } from "../frames/frames";
 
 const handleRequest = frames(async (ctx) => {
+  const fid = ctx.message.requesterVerifiedAddresses;
+  console.log({ fid });
+
   return {
     image: "https://i.postimg.cc/Rhsk3zPB/moxie.png",
 

@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-key */
-import { Button } from "frames.js/next/pages-router/server";
+
+import { Button } from "frames.js/next";
 import { frames } from "./frames";
 
 const handleRequest = frames(async (ctx) => {
@@ -7,7 +8,7 @@ const handleRequest = frames(async (ctx) => {
     image: "https://i.postimg.cc/Rhsk3zPB/moxie.png",
 
     buttons: [
-      <Button action="post" target={"https://moxie-five.vercel.app/api/stats"}>
+      <Button action="post" target={`${process.env.APP_URL}/api/stats`}>
         Value of my locked Moxie
       </Button>,
     ],
