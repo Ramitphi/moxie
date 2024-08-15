@@ -14,6 +14,7 @@ const fetchBalance = async (userAddresses: string[]) => {
     method: "GET",
     headers: {
       accept: "application/json",
+      "x-cg-demo-api-key": `${process.env.COINGECKO}`,
     },
   };
 
