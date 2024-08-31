@@ -5,11 +5,12 @@ import { frames } from "./frames";
 
 const handleRequest = frames(async (ctx) => {
   return {
-    image: "https://i.postimg.cc/Rhsk3zPB/moxie.png",
+    image:
+      "https://i.postimg.cc/m2mZ5NLY/64fbfb5e0a3ae149534cf011-Farcaster-Explained-1.webp",
 
     buttons: [
-      <Button action="post" target={"https://moxie-five.vercel.app/api/stats"}>
-        Value of my locked Moxie
+      <Button action="post" target={`${process.env.APP_URL}/api/stats`}>
+        Check my Farcaster Storage
       </Button>,
     ],
   };

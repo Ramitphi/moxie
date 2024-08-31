@@ -1,22 +1,27 @@
 /* eslint-disable react/jsx-key */
 import { Button } from "frames.js/next/pages-router/server";
+import * as Progress from "@radix-ui/react-progress";
+
 import { frames } from "../frames/frames";
-import fetchBalance from "../../../utils/fetchBalance";
+
 import fetchuserDetails from "../../../utils/fetchuserDeatils";
+import fetchStorageDetails from "../../../utils/fetchStorageDetails";
 
 const handleRequest = frames(async (ctx) => {
   const addresses = ctx?.message?.requesterVerifiedAddresses || "";
   const fid = ctx?.message?.requesterFid;
 
-  if (!addresses || !fid)
+  if (!addresses || !fid) {
     return {
-      image: "https://i.postimg.cc/Rhsk3zPB/moxie.png",
+      image: "https://i.postimg.cc/43h0pZ2K/504708-200.png",
 
       buttons: [<Button action="post">Error</Button>],
     };
+  }
 
-  const balance = (await fetchBalance(addresses)) || "";
-  console.log(balance);
+  const storageDeatils = await fetchStorageDetails(fid);
+
+  console.log({ storageDeatils });
 
   const userDetails = await fetchuserDetails(fid);
 
@@ -34,7 +39,21 @@ const handleRequest = frames(async (ctx) => {
             <span tw="flex text-2xl">@{userDetails.username}</span>
           </div>
         </div>
-        <span tw="mt-5 font-bold text-5xl">Total Value: ${balance}</span>
+
+        <div tw=" flex flex-col gap-1 mt-4">
+          <progress value="32" max="100" tw="mt-2">
+            Casts: {storageDeatils.casts} units out of 10000 (
+            {Math.trunc((storageDeatils.casts / 10000) * 100)}%)
+          </progress>
+          <progress value="32" max="100" tw="mt-2">
+            Reactions: {storageDeatils.reactions} units out of 5000 (
+            {(storageDeatils.reactions / 5000) * 100}%)
+          </progress>
+          <progress value="32" max="100" tw=" mt-2">
+            Links: {storageDeatils.links} units out of 5000 (
+            {(storageDeatils.links / 5000) * 100}%)
+          </progress>
+        </div>
       </div>
     </div>
   );
@@ -44,7 +63,7 @@ const handleRequest = frames(async (ctx) => {
     buttons: [
       <Button
         action="link"
-        target={`https://warpcast.com/~/compose?text=Check value of your locked Moxie here &embeds[]=${process.env.APP_URL}`}
+        target={`https://warpcast.com/~/compose?text=Check stats of your farcaster storage here &embeds[]=${process.env.APP_URL}`}
       >
         Share
       </Button>,
