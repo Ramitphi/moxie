@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-key */
 import { Button } from "frames.js/next/pages-router/server";
-import * as Progress from "@radix-ui/react-progress";
 
 import { frames } from "../frames/frames";
 
